@@ -31,6 +31,7 @@ RUN set -x \
         ipa-pgothic-fonts \
         vlgothic-fonts \
         vlgothic-p-fonts \
+        google-noto-sans-japanese-fonts \
         xorg-x11-fonts-75dpi \
         xorg-x11-fonts-Type1 \
         openssl \

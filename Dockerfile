@@ -31,7 +31,6 @@ RUN set -x \
         ipa-pgothic-fonts \
         vlgothic-fonts \
         vlgothic-p-fonts \
-        google-noto-sans-japanese-fonts \
         xorg-x11-fonts-75dpi \
         xorg-x11-fonts-Type1 \
         openssl \
@@ -39,8 +38,7 @@ RUN set -x \
     && mkdir -p \
         /root/.fonts \
         /root/.config/fontconfig \
-        /tmp/noto \
-        /tmp/twemoji \
+        /tmp/IPAexfont \
         /tmp/wkhtmltopdf \
         /tmp/wqy-microhei-fonts \
     && curl -sSL -1 -o /tmp/wkhtmltopdf/wkhtmltox-${WKHTMLTOPDF_VERSION}-1.centos7.x86_64.rpm https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/${WKHTMLTOPDF_VERSION}/wkhtmltox-${WKHTMLTOPDF_VERSION}-1.centos7.x86_64.rpm \
@@ -49,15 +47,14 @@ RUN set -x \
     && rpm -i wkhtmltox-${WKHTMLTOPDF_VERSION}-1.centos7.x86_64.rpm \
     && cd /tmp/wqy-microhei-fonts \
     && rpm -i wqy-microhei-fonts-${WQY_MICROHEI_FONT_VERESION}.el7.noarch.rpm \
-    && curl -sSL -o /tmp/noto/noto_sans.zip https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip \
-    && curl -sSL -o /tmp/twemoji/twemoji.zip https://github.com/eosrei/twemoji-color-font/releases/download/v${TWEMOJI_FONT_VERESION}/TwitterColorEmoji-SVGinOT-Linux-${TWEMOJI_FONT_VERESION}.zip \
-    && cd /tmp/noto \
-    && unzip -o noto_sans.zip \
-    && mv *.otf /root/.fonts/ \
-    && cd /tmp/twemoji \
-    && unzip -o twemoji.zip \
+    && curl -sSL -o /tmp/IPAexfont/IPAexfont00301.zip http://dl.ipafont.ipa.go.jp/IPAexfont/IPAexfont00301.zip \
+    && cd /tmp/IPAexfont \
+    && unzip -o IPAexfont00301.zip \
+    && cd /tmp/IPAexfont/IPAexfont00301 \
     && mv *.ttf /root/.fonts/ \
-    && rm -rf /tmp/noto /tmp/twemoji /tmp/wkhtmltopdf /tmp/wqy-microhei-fonts
+    && cd /tmp/IPAexfont \
+    && mv IPAexfont00301 /usr/share/fonts/ \
+    && rm -rf /tmp/wkhtmltopdf /tmp/wqy-microhei-fonts /tmp/IPAexfont
 
 # COPY fonts /root/.fonts/
 COPY fonts.conf /root/.config/fontconfig

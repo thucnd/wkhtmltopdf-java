@@ -29,6 +29,8 @@ RUN set -x \
         unzip \
         localectl \
         ipa-pgothic-fonts \
+        ipa-pmincho-fonts \
+        ipa-mincho-fonts \
         vlgothic-fonts \
         vlgothic-p-fonts \
         xorg-x11-fonts-75dpi \
